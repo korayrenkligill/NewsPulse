@@ -22,6 +22,19 @@ function Admin({ user, setUser }) {
       console.log(loggedUser);
     }
   };
+
+  // const addUser = () => {
+  //   let newUser = {
+  //     id: 2,
+  //     username: "koray",
+  //     password: "1234",
+  //   };
+  //   // API'ye POST isteği gönder
+  //   axios
+  //     .post("http://localhost:4000/users", newUser)
+  //     .then((response) => console.log(response.data)) // Yanıtı konsola yaz
+  //     .catch((error) => console.error(error)); // Hata olursa konsola yaz
+  // };
   useEffect(() => {
     // API'ye GET isteği gönder
     axios

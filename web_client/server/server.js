@@ -1,16 +1,19 @@
 const exp = require("constants");
 const express = require("express");
 const cors = require("cors"); // cors modülünü çağır
+const bodyParser = require("body-parser");
 const app = express();
 
 const fs = require("fs");
 const port = 4000;
+const usersJsonLocation = "../../data/users.json";
 
 app.use(cors()); // cors'u ara katman olarak ekle
+app.use(bodyParser.json());
 
 // JSON verilerini okuyan ve döndüren fonksiyon
 function readUsers() {
-  let data = fs.readFileSync("../../data/users.json");
+  let data = fs.readFileSync(usersJsonLocation);
   let users = JSON.parse(data);
   return users;
 }
@@ -19,7 +22,7 @@ function addUser(user) {
   let users = readUsers();
   users.push(user);
   let data = JSON.stringify(users);
-  fs.writeFileSync("users.json", data);
+  fs.writeFileSync(usersJsonLocation, data);
 }
 
 // JSON verilerinden belirli bir kullanıcıyı silen fonksiyon
@@ -27,7 +30,7 @@ function deleteUser(id) {
   let users = readUsers();
   let filteredUsers = users.filter((user) => user.id !== id);
   let data = JSON.stringify(filteredUsers);
-  fs.writeFileSync("users.json", data);
+  fs.writeFileSync(usersJsonLocation, data);
 }
 
 // JSON verilerinde belirli bir kullanıcıyı güncelleyen fonksiyon
@@ -35,7 +38,7 @@ function updateUser(id, user) {
   let users = readUsers();
   let updatedUsers = users.map((u) => (u.id === id ? user : u));
   let data = JSON.stringify(updatedUsers);
-  fs.writeFileSync("users.json", data);
+  fs.writeFileSync(usersJsonLocation, data);
 }
 
 // Tüm kullanıcıları döndüren GET isteği
