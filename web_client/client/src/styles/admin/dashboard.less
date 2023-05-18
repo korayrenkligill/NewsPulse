@@ -1,6 +1,28 @@
 .admin-dashboard {
-  background-color: white;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 10px 10px rgb(240, 240, 240);
+  .only-number {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    .data {
+      padding: 30px;
+      border-radius: 10px;
+      background-color: white;
+      color: rgb(73, 73, 73);
+      box-shadow: 0px 10px 10px rgb(240, 240, 240);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      h2 {
+        font-size: 2rem;
+      }
+      p {
+        font-size: 0.9rem;
+        color: gray;
+      }
+      .icon {
+        font-size: 2rem;
+      }
+    }
+  }
 }

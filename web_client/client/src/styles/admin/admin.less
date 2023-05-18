@@ -4,3 +4,65 @@
   grid-template-columns: 1fr 5fr;
   gap: 30px;
 }
+.login-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .login-form {
+    background-color: white;
+    box-shadow: 0px 10px 10px rgb(240, 240, 240);
+    padding: 50px 100px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    h1 {
+      color: rgb(73, 73, 73);
+      text-align: center;
+    }
+    .form-element {
+      display: flex;
+      flex-direction: column;
+      label {
+        color: gray;
+        font-size: 0.9rem;
+      }
+      input {
+        color: rgb(73, 73, 73);
+        padding: 10px;
+        border-radius: 7px;
+        border: none;
+        background-color: #f7f8f9;
+        width: 300px;
+      }
+      .password {
+        position: relative;
+        label {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          width: 30px;
+          position: absolute;
+          right: 0px;
+          top: 0px;
+          color: rgb(44, 44, 44);
+          font-size: 1.1rem;
+        }
+        input[type="checkbox"] {
+          display: none;
+        }
+      }
+    }
+    button {
+      color: #00ca54;
+      font-size: 1.1rem;
+      transition: color 0.6s;
+      padding: 10px;
+    }
+    button:hover {
+      color: rgb(73, 73, 73);
+    }
+  }
+}
