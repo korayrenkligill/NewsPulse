@@ -1,6 +1,9 @@
 [
   "users":[
-  { "id": 1, "username": "admin", "password": "admin" },
-  { "id": 2, "username": "koray", "password": "1234" }
-]
+    { "id": 1, "username": "admin", "password": "admin" },
+    { "id": 2, "username": "koray", "password": "1234" }
+  ],
+ "news":[
+   { "id": 1, "name":"selam"}
+ ]
 ]
