@@ -8,6 +8,9 @@ import {
   AiOutlineDatabase,
 } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
+import { IoBaseballOutline, IoBaseballSharp } from "react-icons/io5";
+import { MdCloudQueue, MdCloud } from "react-icons/md";
+import { SlGraph } from "react-icons/sl";
 import "../styles/navbar.css";
 function Navbar() {
   return (
@@ -20,12 +23,27 @@ function Navbar() {
           <NavLink to="/">
             <AiFillHome className="icon-fill" />
             <AiOutlineHome className="icon" />
-            Link 1
+            Journal
+          </NavLink>
+          <NavLink to="/sports">
+            <IoBaseballSharp className="icon-fill" />
+            <IoBaseballOutline className="icon" />
+            Sports
+          </NavLink>
+          <NavLink to="/weather">
+            <MdCloud className="icon-fill" />
+            <MdCloudQueue className="icon" />
+            Weather
+          </NavLink>
+          <NavLink to="/finance">
+            <SlGraph className="icon-fill" />
+            <SlGraph className="icon" />
+            Finance
           </NavLink>
           <NavLink to="/admin">
             <AiFillDatabase className="icon-fill" />
             <AiOutlineDatabase className="icon" />
-            Link 2
+            Management panel
           </NavLink>
         </div>
       </div>

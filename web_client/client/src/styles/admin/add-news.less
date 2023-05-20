@@ -1,0 +1,124 @@
+.add-news {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  .header {
+    font-size: 1.5rem;
+    color: rgb(73, 73, 73);
+    margin-bottom: 2rem;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    .drop-area {
+      height: 500px;
+      background-color: rgb(245, 245, 245);
+      color: rgb(73, 73, 73);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      overflow: hidden;
+      .placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        .icon {
+          font-size: 4rem;
+          color: rgba(73, 73, 73, 0.473);
+        }
+      }
+      img {
+        height: 100%;
+        width: auto;
+      }
+    }
+    label {
+      font-size: 0.9rem;
+      color: gray;
+    }
+    input[type="text"],
+    textarea {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      background-color: #f7f8f9;
+      resize: vertical;
+      margin-bottom: 2rem;
+    }
+    .categories {
+      gap: 10px;
+      .parent-selector {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 1rem;
+        position: relative;
+        .choosed-parent {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .parents {
+          display: none;
+          flex-direction: column;
+          align-items: flex-start;
+          border-radius: 10px;
+          overflow: hidden;
+          width: 300px;
+          box-shadow: 0px 10px 10px rgb(240, 240, 240);
+          position: absolute;
+          top: 100%;
+          left: 0px;
+          background-color: white;
+          button {
+            text-align: left;
+            padding: 10px;
+            width: 100%;
+          }
+          button:hover {
+            background-color: #f7f8f9;
+          }
+        }
+      }
+      .parent-selector:hover .parents {
+        display: flex;
+      }
+      .categories-list {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 0.5rem;
+        .category {
+          display: inline-block;
+          padding: 10px 20px;
+          border-radius: 10px;
+          background-color: #f7f8f9;
+          color: rgb(73, 73, 73);
+          input {
+            display: none;
+          }
+        }
+        .category-selected {
+          background-color: rgb(203, 255, 196);
+        }
+      }
+    }
+    .submit-button {
+      padding: 20px;
+      color: #f86340;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      margin-top: 3rem;
+      transition: color 0.5s;
+    }
+    .submit-button:hover {
+      color: rgb(73, 73, 73);
+    }
+  }
+}

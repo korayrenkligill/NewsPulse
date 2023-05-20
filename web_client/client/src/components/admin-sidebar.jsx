@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 import "../styles/admin/sidebar.css";
 import { HiOutlineViewGrid, HiViewGrid } from "react-icons/hi";
 import { SlGraph } from "react-icons/sl";
+import { AiOutlineAppstoreAdd, AiOutlineMinusCircle } from "react-icons/ai";
+import { IoIosAddCircleOutline } from "react-icons/io";
 
 function AdminSideBar() {
   return (
@@ -21,13 +23,17 @@ function AdminSideBar() {
         Graphics
       </NavLink>
       <h2>news</h2>
-      <NavLink to="/admin/test2">
-        <SlGraph className="icon" />
-        Add
+      <NavLink to="/admin/news/add">
+        <IoIosAddCircleOutline className="icon" />
+        Add News
       </NavLink>
       <NavLink to="/admin/test2">
-        <SlGraph className="icon" />
-        Remove
+        <AiOutlineMinusCircle className="icon" />
+        Remove News
+      </NavLink>
+      <NavLink to="/admin/news/categories">
+        <AiOutlineAppstoreAdd className="icon" />
+        Categories
       </NavLink>
       <h2>users</h2>
       <NavLink to="/admin/test2">

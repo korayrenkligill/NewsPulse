@@ -1,0 +1,129 @@
+.admin-categories {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+}
+.admin-categories .header {
+  font-size: 1.5rem;
+  color: #494949;
+  margin-bottom: 2rem;
+}
+.admin-categories form {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 3fr 1fr 50px;
+  gap: 20px;
+  margin-bottom: 1.3rem;
+}
+.admin-categories form input[type="text"] {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: #f7f8f9;
+}
+.admin-categories form .section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.admin-categories form .section .selected-section {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #f7f8f9;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  height: 100%;
+}
+.admin-categories form .section .options {
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0px;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.admin-categories form .section .options p {
+  width: 100%;
+  font-size: 1rem;
+  padding: 10px;
+  cursor: pointer;
+}
+.admin-categories form .section .options p:hover {
+  background-color: #f7f8f9;
+}
+.admin-categories form .section:hover .options {
+  display: flex;
+}
+.admin-categories form button {
+  font-size: 1.3rem;
+  color: #494949;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  transition: background-color 0.3s;
+}
+.admin-categories form button .icon {
+  transform: translateY(2px);
+}
+.admin-categories form button:hover {
+  background-color: #f7f8f9;
+}
+.admin-categories form button:disabled,
+.admin-categories form button[disabled] {
+  cursor: default;
+}
+.admin-categories form button:disabled:hover,
+.admin-categories form button[disabled]:hover {
+  background-color: transparent;
+}
+.admin-categories .category-list {
+  display: flex;
+  flex-direction: column;
+}
+.admin-categories .category-list .category {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgba(250, 250, 250, 0.322);
+  margin-bottom: 10px;
+}
+.admin-categories .category-list .category input {
+  width: 100%;
+  border: none;
+  height: 100%;
+  background-color: transparent;
+  font-size: 1rem;
+}
+.admin-categories .category-list .category div {
+  display: flex;
+  gap: 10px;
+}
+.admin-categories .category-list .category div button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  transition: background-color 0.3s;
+}
+.admin-categories .category-list .category div button:hover {
+  background-color: #f7f8f9;
+}
+.admin-categories .category-list .parent-text {
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  color: gray;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.185);
+}

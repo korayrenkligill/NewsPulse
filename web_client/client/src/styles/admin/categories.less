@@ -1,0 +1,131 @@
+.admin-categories {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  .header {
+    font-size: 1.5rem;
+    color: rgb(73, 73, 73);
+    margin-bottom: 2rem;
+  }
+  form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 3fr 1fr 50px;
+    gap: 20px;
+    margin-bottom: 1.3rem;
+    input[type="text"] {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      background-color: #f7f8f9;
+    }
+    .section {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      .selected-section {
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #f7f8f9;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        height: 100%;
+      }
+      .options {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        width: 100%;
+        top: 100%;
+        left: 0px;
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        p {
+          width: 100%;
+          font-size: 1rem;
+          padding: 10px;
+          cursor: pointer;
+        }
+        p:hover {
+          background-color: #f7f8f9;
+        }
+      }
+    }
+    .section:hover {
+      .options {
+        display: flex;
+      }
+    }
+    button {
+      font-size: 1.3rem;
+      color: rgb(73, 73, 73);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 100px;
+      transition: background-color 0.3s;
+      .icon {
+        transform: translateY(2px);
+      }
+    }
+    button:hover {
+      background-color: #f7f8f9;
+    }
+    button:disabled,
+    button[disabled] {
+      cursor: default;
+    }
+    button:disabled:hover,
+    button[disabled]:hover {
+      background-color: transparent;
+    }
+  }
+  .category-list {
+    display: flex;
+    flex-direction: column;
+    .category {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: rgba(250, 250, 250, 0.322);
+      margin-bottom: 10px;
+      input {
+        width: 100%;
+        border: none;
+        height: 100%;
+        background-color: transparent;
+        font-size: 1rem;
+      }
+      div {
+        display: flex;
+        gap: 10px;
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 30px;
+          width: 30px;
+          font-size: 1.1rem;
+          border-radius: 30px;
+          transition: background-color 0.3s;
+        }
+        button:hover {
+          background-color: #f7f8f9;
+        }
+      }
+    }
+    .parent-text {
+      padding: 5px 10px;
+      font-size: 0.9rem;
+      color: gray;
+      border-bottom: 1px solid rgba(128, 128, 128, 0.185);
+    }
+  }
+}
