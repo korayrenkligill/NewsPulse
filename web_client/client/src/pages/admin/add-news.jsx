@@ -28,7 +28,7 @@ function nowDate() {
   return `${hour}:${minute} ${day}/${month}/${year}`;
 }
 
-function AddNews() {
+function AddNews({ backendUrl }) {
   const [categories, setCategories] = useState([]);
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -78,14 +78,14 @@ function AddNews() {
     };
     // API'ye POST isteği gönder
     axios
-      .post("http://localhost:4000/news", newNews)
+      .post(`${backendUrl}/news`, newNews)
       .then((response) => console.log(response.data)) // Yanıtı konsola yaz
       .catch((error) => console.error(error)); // Hata olursa konsola yaz
   };
   useEffect(() => {
     // API'ye GET isteği gönder
     axios
-      .get("http://localhost:4000/categories")
+      .get(`${backendUrl}/categories`)
       .then((response) => setCategories(response.data))
       .catch((error) => console.error(error)); // Hata olursa konsola yaz
   }, []);

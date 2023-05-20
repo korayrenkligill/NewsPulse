@@ -3,7 +3,7 @@ import "../../styles/admin/categories.css";
 import { TbSend, TbSendOff } from "react-icons/tb";
 import axios from "axios";
 import CategoryItem from "../../components/category-item";
-function Categories() {
+function Categories({ backendUrl }) {
   const [categories, setCategories] = useState([]);
 
   const [writtenCategory, setWrittenCategory] = useState("");
@@ -17,14 +17,14 @@ function Categories() {
     };
     // API'ye POST isteği gönder
     axios
-      .post("http://localhost:4000/categories", newCategory)
+      .post(`${backendUrl}/categories`, newCategory)
       .then((response) => console.log(response.data)) // Yanıtı konsola yaz
       .catch((error) => console.error(error)); // Hata olursa konsola yaz
   };
   useEffect(() => {
     // API'ye GET isteği gönder
     axios
-      .get("http://localhost:4000/categories")
+      .get(`${backendUrl}/categories`)
       .then((response) => setCategories(response.data)) // Veriyi state'e kaydet
       .catch((error) => console.error(error)); // Hata olursa konsola yaz
   }, []);
@@ -98,6 +98,7 @@ function Categories() {
                   id={item.id}
                   category={item.category}
                   parent={item.parent}
+                  backendUrl={backendUrl}
                 />
               );
             }
@@ -111,6 +112,7 @@ function Categories() {
                   id={item.id}
                   category={item.category}
                   parent={item.parent}
+                  backendUrl={backendUrl}
                 />
               );
             }
@@ -124,6 +126,7 @@ function Categories() {
                   id={item.id}
                   category={item.category}
                   parent={item.parent}
+                  backendUrl={backendUrl}
                 />
               );
             }
@@ -137,6 +140,7 @@ function Categories() {
                   id={item.id}
                   category={item.category}
                   parent={item.parent}
+                  backendUrl={backendUrl}
                 />
               );
             }

@@ -5,7 +5,7 @@ import "../../styles/admin/admin.css";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { MdCheckBox } from "react-icons/md";
 import axios from "axios";
-function Admin({ user, setUser }) {
+function Admin({ user, setUser, backendUrl }) {
   const [users, setUsers] = useState([]);
 
   const [username, setUsername] = useState("");
@@ -24,7 +24,7 @@ function Admin({ user, setUser }) {
   useEffect(() => {
     // API'ye GET isteği gönder
     axios
-      .get("http://localhost:4000/users")
+      .get(`${backendUrl}/users`)
       .then((response) => setUsers(response.data)) // Veriyi state'e kaydet
       .catch((error) => console.error(error)); // Hata olursa konsola yaz
   }, []);

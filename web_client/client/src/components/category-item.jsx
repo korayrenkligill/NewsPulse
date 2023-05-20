@@ -17,7 +17,7 @@ function CategoryItem(props) {
     };
     // API'ye PUT isteği gönder
     axios
-      .put(`http://localhost:4000/categories/${props.id}`, newCategory)
+      .put(`${props.backendUrl}/categories/${props.id}`, newCategory)
       .then((response) => console.log(response.data)) // Yanıtı konsola yaz
       .then(() => {
         window.location.reload();
@@ -28,7 +28,7 @@ function CategoryItem(props) {
   const deleteCategory = () => {
     // API'ye DELETE isteği gönder
     axios
-      .delete(`http://localhost:4000/categories/${props.id}`)
+      .delete(`${props.backendUrl}/categories/${props.id}`)
       .then((response) => console.log(response.data)) // Yanıtı konsola yaz
       .then(() => {
         window.location.reload();
