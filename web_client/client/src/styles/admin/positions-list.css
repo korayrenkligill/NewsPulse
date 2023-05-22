@@ -1,0 +1,78 @@
+.admin-positions-list {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+}
+.admin-positions-list .header {
+  font-size: 1.5rem;
+  color: #494949;
+  margin-bottom: 2rem;
+}
+.admin-positions-list .table-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.admin-positions-list .table-grid .table-header,
+.admin-positions-list .table-grid .table-item {
+  padding: 20px 10px;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 150px 1fr 100px 100px;
+  gap: 20px;
+}
+.admin-positions-list .table-grid .table-header .powers,
+.admin-positions-list .table-grid .table-item .powers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.admin-positions-list .table-grid .table-header .powers .power,
+.admin-positions-list .table-grid .table-item .powers .power {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+}
+.admin-positions-list .table-grid .table-header div,
+.admin-positions-list .table-grid .table-item div,
+.admin-positions-list .table-grid .table-header p,
+.admin-positions-list .table-grid .table-item p {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.admin-positions-list .table-grid .table-header .frame,
+.admin-positions-list .table-grid .table-item .frame {
+  max-width: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.admin-positions-list .table-grid .table-header .frame img,
+.admin-positions-list .table-grid .table-item .frame img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+.admin-positions-list .table-grid .table-header button,
+.admin-positions-list .table-grid .table-item button {
+  text-align: left;
+  transition: color 0.5s;
+}
+.admin-positions-list .table-grid .table-header .edit-button,
+.admin-positions-list .table-grid .table-item .edit-button {
+  color: #2f82ff;
+  font-size: 1rem;
+}
+.admin-positions-list .table-grid .table-header .remove-button,
+.admin-positions-list .table-grid .table-item .remove-button {
+  font-size: 1rem;
+  color: red;
+}
+.admin-positions-list .table-grid .table-header button:hover,
+.admin-positions-list .table-grid .table-item button:hover {
+  color: #494949;
+}
+.admin-positions-list .table-grid .table-item:nth-child(even) {
+  background-color: #f7f8f9;
+}

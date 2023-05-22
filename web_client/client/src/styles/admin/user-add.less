@@ -1,0 +1,97 @@
+.user-add-page {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  .header {
+    font-size: 1.5rem;
+    color: rgb(73, 73, 73);
+    margin-bottom: 2rem;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      background-color: #f7f8f9;
+    }
+    label {
+      color: gray;
+    }
+    .form-item {
+      display: flex;
+      flex-direction: column;
+      .positions {
+        display: flex;
+        flex-direction: column;
+        margin-top: 1rem;
+        border-radius: 10px;
+        overflow: hidden;
+        button {
+          text-align: left;
+          padding: 10px;
+          transition: background-color 0.4s;
+          .icon {
+            transform: translateY(2px) scale(1.7);
+          }
+        }
+        button:nth-child(even) {
+          background-color: #f7f8f9;
+        }
+        button.position:hover {
+          background-color: rgba(203, 255, 196, 0.144);
+        }
+        button.selected-position {
+          background-color: rgb(203, 255, 196);
+        }
+      }
+    }
+    .form-item-double {
+      display: flex;
+      gap: 2rem;
+      div {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        .password {
+          position: relative;
+          input {
+            padding: 10px 30px 10px 10px;
+          }
+          label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 30px;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            color: rgb(44, 44, 44);
+            font-size: 1.1rem;
+          }
+          input[type="checkbox"] {
+            display: none;
+          }
+        }
+      }
+    }
+    .submit-button {
+      padding: 10px;
+      color: #f86340;
+      font-size: 1.1rem;
+      transition: color 0.5s;
+      margin-top: 1rem;
+      .icon {
+        transform: translateY(2px);
+      }
+    }
+    .submit-button:hover {
+      color: rgb(44, 44, 44);
+    }
+  }
+}

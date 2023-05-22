@@ -13,7 +13,7 @@
   flex-direction: column;
 }
 .add-news form .drop-area {
-  height: 500px;
+  width: 100%;
   background-color: #f5f5f5;
   color: #494949;
   border-radius: 20px;
@@ -23,6 +23,7 @@
   justify-content: center;
   margin-bottom: 2rem;
   overflow: hidden;
+  aspect-ratio: 16 / 9;
 }
 .add-news form .drop-area .placeholder {
   display: flex;
@@ -35,9 +36,13 @@
   font-size: 4rem;
   color: rgba(73, 73, 73, 0.473);
 }
-.add-news form .drop-area img {
-  height: 100%;
-  width: auto;
+.add-news form .drop-area .frame {
+  width: 100%;
+  overflow: hidden;
+}
+.add-news form .drop-area .frame img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
 }
 .add-news form label {
   font-size: 0.9rem;
@@ -118,6 +123,9 @@
   border-radius: 10px;
   margin-top: 3rem;
   transition: color 0.5s;
+}
+.add-news form .submit-button .icon {
+  transform: translateY(2px);
 }
 .add-news form .submit-button:hover {
   color: #494949;

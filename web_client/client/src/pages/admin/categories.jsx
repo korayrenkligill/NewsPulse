@@ -3,15 +3,18 @@ import "../../styles/admin/categories.css";
 import { TbSend, TbSendOff } from "react-icons/tb";
 import axios from "axios";
 import CategoryItem from "../../components/category-item";
+import { v4 as uuidv4 } from "uuid";
+
 function Categories({ backendUrl }) {
   const [categories, setCategories] = useState([]);
 
   const [writtenCategory, setWrittenCategory] = useState("");
   const [parent, setParent] = useState("Journal");
 
-  const addCategory = () => {
+  const addCategory = (event) => {
+    event.preventDefault();
     let newCategory = {
-      id: categories[categories.length - 1].id + 1,
+      id: uuidv4(),
       parent: parent,
       category: writtenCategory,
     };
@@ -19,6 +22,9 @@ function Categories({ backendUrl }) {
     axios
       .post(`${backendUrl}/categories`, newCategory)
       .then((response) => console.log(response.data)) // Yanıtı konsola yaz
+      .then(() => {
+        window.location.reload();
+      })
       .catch((error) => console.error(error)); // Hata olursa konsola yaz
   };
   useEffect(() => {

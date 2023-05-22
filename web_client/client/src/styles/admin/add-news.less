@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
     .drop-area {
-      height: 500px;
+      width: 100%;
       background-color: rgb(245, 245, 245);
       color: rgb(73, 73, 73);
       border-radius: 20px;
@@ -21,6 +21,8 @@
       justify-content: center;
       margin-bottom: 2rem;
       overflow: hidden;
+      aspect-ratio: 16 / 9;
+
       .placeholder {
         display: flex;
         flex-direction: column;
@@ -32,9 +34,13 @@
           color: rgba(73, 73, 73, 0.473);
         }
       }
-      img {
-        height: 100%;
-        width: auto;
+      .frame {
+        width: 100%;
+        overflow: hidden;
+        img {
+          width: 100%;
+          aspect-ratio: 16 / 9;
+        }
       }
     }
     label {
@@ -116,6 +122,9 @@
       border-radius: 10px;
       margin-top: 3rem;
       transition: color 0.5s;
+      .icon {
+        transform: translateY(2px);
+      }
     }
     .submit-button:hover {
       color: rgb(73, 73, 73);

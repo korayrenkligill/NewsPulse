@@ -1,0 +1,97 @@
+.user-add-page {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+}
+.user-add-page .header {
+  font-size: 1.5rem;
+  color: #494949;
+  margin-bottom: 2rem;
+}
+.user-add-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.user-add-page form input[type="text"],
+.user-add-page form input[type="email"],
+.user-add-page form input[type="password"] {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: #f7f8f9;
+}
+.user-add-page form label {
+  color: gray;
+}
+.user-add-page form .form-item {
+  display: flex;
+  flex-direction: column;
+}
+.user-add-page form .form-item .positions {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.user-add-page form .form-item .positions button {
+  text-align: left;
+  padding: 10px;
+  transition: background-color 0.4s;
+}
+.user-add-page form .form-item .positions button .icon {
+  transform: translateY(2px) scale(1.7);
+}
+.user-add-page form .form-item .positions button:nth-child(even) {
+  background-color: #f7f8f9;
+}
+.user-add-page form .form-item .positions button.position:hover {
+  background-color: rgba(203, 255, 196, 0.144);
+}
+.user-add-page form .form-item .positions button.selected-position {
+  background-color: #cbffc4;
+}
+.user-add-page form .form-item-double {
+  display: flex;
+  gap: 2rem;
+}
+.user-add-page form .form-item-double div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.user-add-page form .form-item-double div .password {
+  position: relative;
+}
+.user-add-page form .form-item-double div .password input {
+  padding: 10px 30px 10px 10px;
+}
+.user-add-page form .form-item-double div .password label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 30px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  color: #2c2c2c;
+  font-size: 1.1rem;
+}
+.user-add-page form .form-item-double div .password input[type="checkbox"] {
+  display: none;
+}
+.user-add-page form .submit-button {
+  padding: 10px;
+  color: #f86340;
+  font-size: 1.1rem;
+  transition: color 0.5s;
+  margin-top: 1rem;
+}
+.user-add-page form .submit-button .icon {
+  transform: translateY(2px);
+}
+.user-add-page form .submit-button:hover {
+  color: #2c2c2c;
+}

@@ -1,0 +1,64 @@
+.admin-news-list {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+}
+.admin-news-list .header {
+  font-size: 1.5rem;
+  color: #494949;
+  margin-bottom: 2rem;
+}
+.admin-news-list .table-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.admin-news-list .table-grid .table-header,
+.admin-news-list .table-grid .table-item {
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 200px 2fr 3fr 1fr 1fr 1fr;
+  gap: 20px;
+}
+.admin-news-list .table-grid .table-header div,
+.admin-news-list .table-grid .table-item div,
+.admin-news-list .table-grid .table-header p,
+.admin-news-list .table-grid .table-item p {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.admin-news-list .table-grid .table-header .frame,
+.admin-news-list .table-grid .table-item .frame {
+  max-width: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.admin-news-list .table-grid .table-header .frame img,
+.admin-news-list .table-grid .table-item .frame img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+.admin-news-list .table-grid .table-header button,
+.admin-news-list .table-grid .table-item button {
+  text-align: left;
+  transition: color 0.5s;
+}
+.admin-news-list .table-grid .table-header .edit-button,
+.admin-news-list .table-grid .table-item .edit-button {
+  color: #2f82ff;
+  font-size: 1rem;
+}
+.admin-news-list .table-grid .table-header .remove-button,
+.admin-news-list .table-grid .table-item .remove-button {
+  font-size: 1rem;
+  color: red;
+}
+.admin-news-list .table-grid .table-header button:hover,
+.admin-news-list .table-grid .table-item button:hover {
+  color: #494949;
+}
+.admin-news-list .table-grid .table-item:nth-child(even) {
+  background-color: #f7f8f9;
+}

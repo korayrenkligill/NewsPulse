@@ -42,6 +42,9 @@
 .login-screen .login-form .form-element .password {
   position: relative;
 }
+.login-screen .login-form .form-element .password input {
+  padding: 10px 30px 10px 10px;
+}
 .login-screen .login-form .form-element .password label {
   display: flex;
   align-items: center;

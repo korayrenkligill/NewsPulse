@@ -26,7 +26,7 @@ var Users = {
     return users;
   },
   add: function (user) {
-    let users = readUsers();
+    let users = Users.read();
     users.push(user);
     let data = readData();
     data.users = users;
@@ -35,13 +35,13 @@ var Users = {
   },
   //UPDATE VE DELETE KISMI BOZUK BUNLARI KATEGORİ GİBİ YAP
   update: function (id, user) {
-    let users = readUsers();
+    let users = Users.read();
     let updatedUsers = users.map((u) => (u.id === id ? user : u));
     let data = JSON.stringify(updatedUsers);
     fs.writeFileSync(JsonLocation, data);
   },
   delete: function (id) {
-    let users = readUsers();
+    let users = Users.read();
     let filteredUsers = users.filter((user) => user.id !== id);
     let data = JSON.stringify(filteredUsers);
     fs.writeFileSync(JsonLocation, data);

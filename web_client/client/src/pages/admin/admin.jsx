@@ -5,23 +5,29 @@ import "../../styles/admin/admin.css";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { MdCheckBox } from "react-icons/md";
 import axios from "axios";
-function Admin({ user, setUser, backendUrl }) {
+function Admin({ user, setUser, backendUrl, logout }) {
   const [users, setUsers] = useState([]);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
-  const handleSubmit = () => {
-    const loggedUser = users.filter(
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const loggedUser = users.find(
       (element) =>
         element.username === username && element.password === password
     );
-    if (loggedUser.length > 0) {
+    if (loggedUser) {
       setUser(loggedUser);
+      document.cookie = `loggedUser=${JSON.stringify(
+        loggedUser
+      )}; max-age=3600;`; // Çerez oluştur ve geçerlilik süresini ayarla
+      document.cookie = `isLoggedIn=true; max-age=3600;`;
     }
   };
   useEffect(() => {
+    document.title = "NewsPulse Admin Page";
     // API'ye GET isteği gönder
     axios
       .get(`${backendUrl}/users`)
@@ -35,7 +41,7 @@ function Admin({ user, setUser, backendUrl }) {
       return (
         <div className="admin">
           <div>
-            <AdminSideBar />
+            <AdminSideBar logout={logout} user={user} />
           </div>
           <div>
             <Outlet />
@@ -62,7 +68,7 @@ function Admin({ user, setUser, backendUrl }) {
                 <input
                   type={passwordVisibility ? "text" : "password"}
                   id=""
-                  placeholder="Uic9XLF"
+                  placeholder="*********"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />

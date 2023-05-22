@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/admin/add-news.css";
 import { BiImageAdd, BiChevronDown } from "react-icons/bi";
+import { AiFillPlusCircle } from "react-icons/ai";
 import axios from "axios";
 import AddNewsCategory from "../../components/add-news-category";
 import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const date = new Date();
 
@@ -28,7 +31,9 @@ function nowDate() {
   return `${hour}:${minute} ${day}/${month}/${year}`;
 }
 
-function AddNews({ backendUrl }) {
+function AddNews({ backendUrl, user }) {
+  const navigate = useNavigate();
+
   const [categories, setCategories] = useState([]);
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -39,6 +44,53 @@ function AddNews({ backendUrl }) {
 
   const [selectedCategories, setSelectedCategories] = useState([]);
 
+  const notifications = {
+    waiting: () =>
+      toast.info("Haber kaydediliyor...", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }),
+    succes: () =>
+      toast.success("Haber başarıyla kaydedildi!", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }),
+    error: () =>
+      toast.error("Haber kaydı başarısız!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }),
+  };
+
+  const warning = (message) =>
+    toast.warn(message, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   const handleDrop = (e) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
@@ -66,21 +118,45 @@ function AddNews({ backendUrl }) {
     }
   };
 
-  const addNews = () => {
+  const addNews = (event) => {
+    event.preventDefault();
     let newNews = {
       id: uuidv4(),
       title: title,
       content: content,
+      author: user,
       time: nowDate(),
       image: selectedImage,
       categories: selectedCategories,
       parent: parent,
     };
-    // API'ye POST isteği gönder
-    axios
-      .post(`${backendUrl}/news`, newNews)
-      .then((response) => console.log(response.data)) // Yanıtı konsola yaz
-      .catch((error) => console.error(error)); // Hata olursa konsola yaz
+    if (title.length > 0) {
+      if (content.length > 0) {
+        if (selectedImage) {
+          if (selectedCategories.length > 0) {
+            notifications.waiting();
+            // API'ye POST isteği gönder
+            axios
+              .post(`${backendUrl}/news`, newNews)
+              .then(notifications.succes)
+              .then((response) => console.log(response.data)) // Yanıtı konsola yaz
+              .then(() => {
+                navigate("/admin/news/");
+                // window.location.reload();
+              })
+              .catch((error) => console.error(error)); // Hata olursa konsola yaz
+          } else {
+            warning("En az bir kategori seçmelisin!");
+          }
+        } else {
+          warning("Bir içerik resmi seçmelisin!");
+        }
+      } else {
+        warning("İçerik girmelisin!");
+      }
+    } else {
+      warning("Bir başlık girmelisin!");
+    }
   };
   useEffect(() => {
     // API'ye GET isteği gönder
@@ -100,7 +176,9 @@ function AddNews({ backendUrl }) {
           onDragOver={handleDragOver}
         >
           {selectedImage ? (
-            <img src={selectedImage} alt="Selected" />
+            <div className="frame">
+              <img src={selectedImage} alt="Selected" />
+            </div>
           ) : (
             <div className="placeholder">
               <BiImageAdd className="icon" />
@@ -195,7 +273,7 @@ function AddNews({ backendUrl }) {
           </div>
         </div>
         <button type="submit" className="submit-button">
-          Complete
+          <AiFillPlusCircle className="icon" /> Complete
         </button>
       </form>
     </div>
