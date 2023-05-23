@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import "../../styles/admin/add-position.css";
+import "../../../../styles/admin/add-position.css";
 import { RxDotFilled } from "react-icons/rx";
 import { AiFillPlusCircle } from "react-icons/ai";
-import PowersItem from "../../components/powers-item";
+import PowersItem from "../../../../components/powers-item";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ToastNotification from "../../../../components/send-notification";
 
 const powersList = [
   "Sahip kullanıcı oluşturma",
@@ -30,15 +31,36 @@ function PositionsAdd({ backendUrl }) {
       color: color,
       powers: powers,
     };
-    // API'ye POST isteği gönder
-    axios
-      .post(`${backendUrl}/positions`, newPosition)
-      .then((response) => console.log(response.data)) // Yanıtı konsola yaz
-      .then(() => {
-        navigate("/admin/positions/");
-        window.location.reload();
-      })
-      .catch((error) => console.error(error)); // Hata olursa konsola yaz
+
+    if (position.length > 0) {
+      if (
+        color.length > 0 &&
+        (color.length === 4 || color.length === 7 || color.length === 9)
+      ) {
+        if (powers.length > 0) {
+          // API'ye POST isteği gönder
+          axios
+            .post(`${backendUrl}/positions`, newPosition)
+            .then(ToastNotification.success("Pozisyon başarıyla eklendi 🐣"))
+            .then((response) => console.log(response.data)) // Yanıtı konsola yaz
+            .then(() => {
+              navigate("/admin/positions/");
+            })
+            .catch((error) => {
+              console.error(error);
+              ToastNotification.error(
+                "Pozisyon ekleme esnasında bir hata ile karşılaşıldı 🚨"
+              );
+            }); // Hata olursa konsola yaz
+        } else {
+          ToastNotification.warn("En az bir yetki seçmelisin 🛠");
+        }
+      } else {
+        ToastNotification.warn("Girilen renk kodu hatalı olabilir 🛠");
+      }
+    } else {
+      ToastNotification.warn("Pozisyon ismi boş bırakılamaz 🛠");
+    }
   };
   return (
     <div className="add-position-page">

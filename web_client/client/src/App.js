@@ -1,21 +1,23 @@
 import { Routes, Route } from "react-router-dom";
-import "./App.css";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
+import "./App.css";
 import Main from "./pages/main";
 import Admin from "./pages/admin/admin";
-import Dashboard from "./pages/admin/dashboard";
+import Dashboard from "./pages/admin/statistics/dashboard";
 import Navbar from "./components/navbar";
 import { useEffect, useState } from "react";
-import AddNews from "./pages/admin/add-news";
-import Categories from "./pages/admin/categories";
+import AddNews from "./pages/admin/news/admin-add-news";
+import Categories from "./pages/admin/news/categories/admin-categories-list";
 import Error404 from "./pages/404";
-import NewsList from "./pages/admin/news";
-import AdminNewsDetail from "./pages/admin/admin-news-detail";
-import UsersList from "./pages/admin/users-list";
-import UserAdd from "./pages/admin/user-add";
-import PositionsList from "./pages/admin/positions-list";
-import PositionsAdd from "./pages/admin/add-positions";
+import NewsList from "./pages/admin/news/admin-news-list";
+import AdminNewsDetail from "./pages/admin/news/admin-news-detail";
+import UsersList from "./pages/admin/user/admin-users-list";
+import UserAdd from "./pages/admin/user/admin-add-user";
+import PositionsList from "./pages/admin/user/positions/admin-positions-list";
+import PositionsAdd from "./pages/admin/user/positions/admin-add-positions";
+import UserDetail from "./pages/admin/user/admin-user-detail";
+import PositionDetail from "./pages/admin/user/positions/admin-position-detail";
 
 const backendUrl = "https://newspulse-api.glitch.me";
 
@@ -90,12 +92,20 @@ function App() {
             element={<UserAdd backendUrl={backendUrl} />}
           />
           <Route
+            path="/admin/users/edit/:id"
+            element={<UserDetail backendUrl={backendUrl} />}
+          />
+          <Route
             path="/admin/positions"
             element={<PositionsList backendUrl={backendUrl} />}
           />
           <Route
             path="/admin/positions/add"
             element={<PositionsAdd backendUrl={backendUrl} />}
+          />
+          <Route
+            path="/admin/positions/edit/:id"
+            element={<PositionDetail backendUrl={backendUrl} />}
           />
           <Route path="/admin/*" element={<Error404 />} />
         </Route>

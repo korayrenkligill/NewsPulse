@@ -1,18 +1,23 @@
 import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import ToastNotification from "./send-notification";
 
-function PositionListItem({ item, backendUrl }) {
+function PositionListItem({ item, backendUrl, getPositions }) {
   const navigation = useNavigate();
   const deletePosition = () => {
     // API'ye DELETE isteği gönder
     axios
       .delete(`${backendUrl}/positions/${item.id}`)
+      .then(ToastNotification.success("Pozisyon başarıyla kaldırıldı 💎"))
       .then((response) => console.log(response.data)) // Yanıtı konsola yaz
-      .then(() => {
-        window.location.reload();
-      })
-      .catch((error) => console.error(error)); // Hata olursa konsola yaz
+      .then(getPositions)
+      .catch((error) => {
+        console.error(error);
+        ToastNotification.error(
+          "Pozisyon kaldırma esnasında hata ile karşılaşıldı 💣"
+        );
+      }); // Hata olursa konsola yaz
   };
 
   return (

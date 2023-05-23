@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import "../../styles/admin/dashboard.css";
-import DashboardOnlyNumberData from "../../components/dashboard-only-number-data";
+import "../../../styles/admin/dashboard.css";
+import DashboardOnlyNumberData from "../../../components/statistics/dashboard-only-number-data";
 import { AiOutlineEye, AiOutlineUser } from "react-icons/ai";
 import { MdContentCopy } from "react-icons/md";
 

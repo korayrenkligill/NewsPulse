@@ -3,6 +3,7 @@ import { MdModeEditOutline } from "react-icons/md";
 import { IoCloseSharp } from "react-icons/io5";
 import { IoMdCheckmark } from "react-icons/io";
 import axios from "axios";
+import ToastNotification from "./send-notification";
 
 function CategoryItem(props) {
   const [editMode, setEditMode] = useState(false);
@@ -15,25 +16,40 @@ function CategoryItem(props) {
       parent: props.parent,
       category: category,
     };
-    // API'ye PUT isteği gönder
-    axios
-      .put(`${props.backendUrl}/categories/${props.id}`, newCategory)
-      .then((response) => console.log(response.data)) // Yanıtı konsola yaz
-      .then(() => {
-        window.location.reload();
-      })
-      .catch((error) => console.error(error)); // Hata olursa konsola yaz
+    if (category.length > 0) {
+      // API'ye PUT isteği gönder
+      axios
+        .put(`${props.backendUrl}/categories/${props.id}`, newCategory)
+        .then(ToastNotification.success("Kategori başarıyla güncellendi 🎉"))
+        .then((response) => console.log(response.data)) // Yanıtı konsola yaz
+        .then(props.getCategories)
+        .then(() => {
+          setEditMode(!editMode);
+        })
+        .catch((error) => {
+          console.error(error);
+          ToastNotification.error(
+            "Kategori güncelleme esnasında bir hata ile karşılaşıldı ❤️‍🩹"
+          );
+        }); // Hata olursa konsola yaz
+    } else {
+      ToastNotification.warn("Bir kategori ismi belirlemelisin 🧸");
+    }
   };
 
   const deleteCategory = () => {
     // API'ye DELETE isteği gönder
     axios
       .delete(`${props.backendUrl}/categories/${props.id}`)
+      .then(ToastNotification.success("Kategori başarıyla kaldırıldı 🎉"))
       .then((response) => console.log(response.data)) // Yanıtı konsola yaz
-      .then(() => {
-        window.location.reload();
-      })
-      .catch((error) => console.error(error)); // Hata olursa konsola yaz
+      .then(props.getCategories)
+      .catch((error) => {
+        console.error(error);
+        ToastNotification.error(
+          "Kategori kaldırılma esnasında bir hata ile karşılaşıldı ❤️‍🩹"
+        );
+      }); // Hata olursa konsola yaz
   };
   if (!editMode)
     return (

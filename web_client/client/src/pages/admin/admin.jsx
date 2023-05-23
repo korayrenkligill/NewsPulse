@@ -3,9 +3,12 @@ import { Outlet } from "react-router-dom";
 import AdminSideBar from "../../components/admin-sidebar";
 import "../../styles/admin/admin.css";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { MdCheckBox } from "react-icons/md";
 import axios from "axios";
+import PuffLoader from "react-spinners/ClipLoader";
+import ToastNotification from "../../components/send-notification";
+
 function Admin({ user, setUser, backendUrl, logout }) {
+  const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
 
   const [username, setUsername] = useState("");
@@ -24,6 +27,8 @@ function Admin({ user, setUser, backendUrl, logout }) {
         loggedUser
       )}; max-age=3600;`; // Çerez oluştur ve geçerlilik süresini ayarla
       document.cookie = `isLoggedIn=true; max-age=3600;`;
+    } else {
+      ToastNotification.error("Kullanıcı bulunamadı");
     }
   };
   useEffect(() => {
@@ -32,12 +37,21 @@ function Admin({ user, setUser, backendUrl, logout }) {
     axios
       .get(`${backendUrl}/users`)
       .then((response) => setUsers(response.data)) // Veriyi state'e kaydet
+      .then(() => {
+        setLoading(false);
+      })
       .catch((error) => console.error(error)); // Hata olursa konsola yaz
   }, []);
 
   //Loading ekranı tamamlandığında
-  if (users.length > 0) {
-    if (user) {
+  if (user) {
+    if (loading)
+      return (
+        <div className="loading">
+          <PuffLoader color="#f86340" />
+        </div>
+      );
+    else
       return (
         <div className="admin">
           <div>
@@ -48,7 +62,14 @@ function Admin({ user, setUser, backendUrl, logout }) {
           </div>
         </div>
       );
-    } else {
+  } else {
+    if (loading)
+      return (
+        <div className="loading">
+          <PuffLoader color="#f86340" />
+        </div>
+      );
+    else
       return (
         <div className="login-screen">
           <form className="login-form" onSubmit={handleSubmit} method="get">
@@ -91,7 +112,6 @@ function Admin({ user, setUser, backendUrl, logout }) {
           </form>
         </div>
       );
-    }
   }
 }
 

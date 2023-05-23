@@ -2,58 +2,26 @@ import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import ToastNotification from "../components/send-notification";
 
-function NewsListItem({ item, backendUrl }) {
+function NewsListItem({ item, backendUrl, getNews }) {
   const navigation = useNavigate();
 
-  const notifications = {
-    waiting: () =>
-      toast.info("Veri siliniyor...", {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      }),
-    succes: () =>
-      toast.success("Veri başarıyla silindi!", {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      }),
-    error: () =>
-      toast.error("Veri silme işlemi başarısız!", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      }),
-  };
   const deleteNews = () => {
     // API'ye DELETE isteği gönder
-    notifications.waiting();
     axios
       .delete(`${backendUrl}/news/${item.id}`)
-      .then(notifications.succes)
+      .then(ToastNotification.success("Haber başarıyla kaldırıldı 🎉"))
       .then((response) => console.log(response.data)) // Yanıtı konsola yaz
       .then(() => {
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+        getNews();
       })
-      .catch((error) => console.error(error)); // Hata olursa konsola yaz
+      .catch((error) => {
+        console.error(error);
+        ToastNotification.error(
+          "Haber kaldırma işlemi sırasında bir hata meydana geldi ❤️‍🩹"
+        );
+      }); // Hata olursa konsola yaz
   };
   return (
     <div className="table-item">

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import "../../styles/admin/add-news.css";
+import "../../../styles/admin/add-news.css";
 import { BiImageAdd, BiChevronDown } from "react-icons/bi";
 import { AiFillPlusCircle } from "react-icons/ai";
 import axios from "axios";
-import AddNewsCategory from "../../components/add-news-category";
+import AddNewsCategory from "../../../components/add-news-category";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import ToastNotification from "../../../components/send-notification";
 const date = new Date();
 
 function nowDate() {
@@ -44,53 +44,6 @@ function AddNews({ backendUrl, user }) {
 
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  const notifications = {
-    waiting: () =>
-      toast.info("Haber kaydediliyor...", {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      }),
-    succes: () =>
-      toast.success("Haber başarıyla kaydedildi!", {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      }),
-    error: () =>
-      toast.error("Haber kaydı başarısız!", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      }),
-  };
-
-  const warning = (message) =>
-    toast.warn(message, {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
   const handleDrop = (e) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
@@ -134,11 +87,10 @@ function AddNews({ backendUrl, user }) {
       if (content.length > 0) {
         if (selectedImage) {
           if (selectedCategories.length > 0) {
-            notifications.waiting();
             // API'ye POST isteği gönder
             axios
               .post(`${backendUrl}/news`, newNews)
-              .then(notifications.succes)
+              .then(ToastNotification.success("Haber başarıyla eklendi 🎉"))
               .then((response) => console.log(response.data)) // Yanıtı konsola yaz
               .then(() => {
                 navigate("/admin/news/");
@@ -146,16 +98,16 @@ function AddNews({ backendUrl, user }) {
               })
               .catch((error) => console.error(error)); // Hata olursa konsola yaz
           } else {
-            warning("En az bir kategori seçmelisin!");
+            ToastNotification.warn("En az bir kategori seçmelisin 🙉");
           }
         } else {
-          warning("Bir içerik resmi seçmelisin!");
+          ToastNotification.warn("Bir içerik resmi seçmelisin 🙈");
         }
       } else {
-        warning("İçerik girmelisin!");
+        ToastNotification.warn("İçerik girmelisin 🙊");
       }
     } else {
-      warning("Bir başlık girmelisin!");
+      ToastNotification.warn("Bir başlık girmelisin 🙊");
     }
   };
   useEffect(() => {

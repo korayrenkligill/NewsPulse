@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { toast } from "react-toastify";
-import "../../styles/admin/user-add.css";
+import "../../../styles/admin/user-add.css";
 import {
   AiOutlineEyeInvisible,
   AiOutlineEye,
@@ -10,6 +9,7 @@ import {
 import { RxDotFilled } from "react-icons/rx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ToastNotification from "../../../components/send-notification";
 
 function UserAdd({ backendUrl }) {
   const navigate = useNavigate();
@@ -27,42 +27,6 @@ function UserAdd({ backendUrl }) {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [passwordVisibility2, setPasswordVisibility2] = useState(false);
 
-  const notifications = {
-    waiting: () =>
-      toast.info("Kullanıcı kaydediliyor...", {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      }),
-    succes: () =>
-      toast.success("Kullanıcı başarıyla kaydedildi!", {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      }),
-    error: () =>
-      toast.error("Kullanıcı kaydı başarısız!", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      }),
-  };
-
   const addUser = (event) => {
     event.preventDefault();
     let newUser = {
@@ -74,19 +38,57 @@ function UserAdd({ backendUrl }) {
       email: email,
       position: selectedPosition,
     };
-    // API'ye POST isteği gönder
-    notifications.waiting();
-    axios
-      .post(`${backendUrl}/users`, newUser)
-      .then(notifications.succes)
-      .then((response) => console.log(response.data)) // Yanıtı konsola yaz
-      .then(() => {
-        navigate("/admin/users/");
-      })
-      .catch((error) => {
-        notifications.error();
-        console.error(error);
-      }); // Hata olursa konsola yaz
+
+    if (username.length > 0) {
+      if (password.length > 0) {
+        if (password2.length > 0) {
+          if (password === password2) {
+            if (name.length > 0) {
+              if (surname.length > 0) {
+                if (email.length > 0) {
+                  if (selectedPosition.length > 0) {
+                    // API'ye POST isteği gönder
+                    axios
+                      .post(`${backendUrl}/users`, newUser)
+                      .then(
+                        ToastNotification.success(
+                          "Kullanıcı başarıyla eklendi 🍬"
+                        )
+                      )
+                      .then((response) => console.log(response.data)) // Yanıtı konsola yaz
+                      .then(() => {
+                        navigate("/admin/users/");
+                      })
+                      .catch((error) => {
+                        ToastNotification.error(
+                          "Kullanıcı ekleme esnasında bir hata ile karşılaşıldı 😡"
+                        );
+                        console.error(error);
+                      }); // Hata olursa konsola yaz
+                  } else {
+                    ToastNotification.warn("Bir pozisyon seçmelisin 🥸");
+                  }
+                } else {
+                  ToastNotification.warn("E-mail alanı boş bırakılamaz 🥸");
+                }
+              } else {
+                ToastNotification.warn("Soyisim alanı boş bırakılamaz 🥸");
+              }
+            } else {
+              ToastNotification.warn("İsim alanı boş bırakılamaz 🥸");
+            }
+          } else {
+            ToastNotification.warn("Girilen şifre değerleri eşleşmiyor 🥸");
+          }
+        } else {
+          ToastNotification.warn("Şifre tekrar alanı boş bırakılamaz 🥸");
+        }
+      } else {
+        ToastNotification.warn("Şifre alanı boş bırakılamaz 🥸");
+      }
+    } else {
+      ToastNotification.warn("Kullanıcı adı alanı boş bırakılamaz 🥸");
+    }
   };
   useEffect(() => {
     // API'ye GET isteği gönder
@@ -94,12 +96,10 @@ function UserAdd({ backendUrl }) {
       .get(`${backendUrl}/positions`)
       .then((response) => setPositions(response.data)) // Veriyi state'e kaydet
       .catch((error) => console.error(error)); // Hata olursa konsola yaz
-  }, []);
+  }, [backendUrl]);
   return (
     <div className="user-add-page">
-      <h1 className="header" onClick={notifications.waiting}>
-        User Add
-      </h1>
+      <h1 className="header">User Add</h1>
       <form onSubmit={addUser}>
         <div className="form-item-double">
           <div>
